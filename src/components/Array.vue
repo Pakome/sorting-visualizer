@@ -9,15 +9,56 @@ const props = defineProps<{ size: number }>();
 const shuffledArray = shuffleArray([...Array(props.size).keys()]);
 let array = ref(shuffledArray);
 let arraySize = ref(props.size);
+let isComputing = false;
 
 const generateNewArray = (size: number): void => {
+  if (isComputing) {
+    return;
+  }
   const newArray = [...Array(size).keys()];
   array.value = shuffleArray(newArray);
 }
 
 const sortArray = async (): Promise<void> => {
-  const sortedArray = await bubbleSort(array);
+  isComputing = true;
+  await bubbleSort(array);
+  isComputing = false;
 }
+
+window.addEventListener('keyup', (ev) => {
+  if (isComputing) {
+    return;
+  }
+  if (ev.key === 'Enter') {
+    sortArray();
+  }
+  if (ev.key === 'g') {
+    generateNewArray(arraySize.value);
+  }
+  if (ev.key === 'ArrowUp') {
+    generateNewArray(arraySize.value++);
+  }
+  if (ev.key === 'ArrowDown') {
+    if (arraySize.value < 2) {
+      return;
+    }
+    generateNewArray(arraySize.value--);
+  }
+  if (ev.key === 'ArrowRight') {
+    generateNewArray(arraySize.value += 10);
+  }
+  if (ev.key === 'ArrowLeft') {
+    if (arraySize.value < 11) {
+      return;
+    }
+    generateNewArray(arraySize.value -= 10);
+  }
+});
+
+// TODO: Add generation animation
+// TODO: Add color to currently selected element
+// TODO: Format display
+
 </script>
 
 <template>
@@ -39,6 +80,5 @@ const sortArray = async (): Promise<void> => {
   height: 20vh;
   display: flex;
   align-items: flex-end;
-  /* justify-content: flex-end; */
 }
 </style>
