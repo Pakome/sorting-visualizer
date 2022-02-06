@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { bubbleSort } from '../algorithms/bubble-sort';
 import Element from './Element.vue';
+import algorithms from '../algorithms';
 import { shuffleArray } from './utils';
 
 const props = defineProps<{ size: number }>();
 const shuffledArray = shuffleArray([...Array(props.size).keys()]);
 let array = ref(shuffledArray);
 let arraySize = ref(props.size);
+let selectedAlgo = ref(algorithms[0]);
 let isComputing = false;
 
 const generateNewArray = (size: number): void => {
@@ -21,7 +22,7 @@ const generateNewArray = (size: number): void => {
 
 const sortArray = async (): Promise<void> => {
   isComputing = true;
-  await bubbleSort(array);
+  await selectedAlgo.value.run(array);
   isComputing = false;
 }
 
@@ -54,11 +55,6 @@ window.addEventListener('keyup', (ev) => {
     generateNewArray(arraySize.value -= 10);
   }
 });
-
-// TODO: Add generation animation
-// TODO: Add color to currently selected element
-// TODO: Format display
-
 </script>
 
 <template>
@@ -66,6 +62,9 @@ window.addEventListener('keyup', (ev) => {
   <button @click="generateNewArray(size)">Generate new</button>
   <button @click="sortArray()">Sort & Visualize</button>
   <input type="number" v-model="arraySize" @change="generateNewArray(arraySize)" />
+  <select name="sorts" id="sort-select" v-model="selectedAlgo">
+    <option v-for="algo in algorithms" :value="algo">{{ algo.formattedName }}</option>
+  </select>
   <div class="array-container">
     <Element v-for="element in array" :value="element" />
   </div>

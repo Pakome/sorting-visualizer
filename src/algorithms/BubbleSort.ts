@@ -7,7 +7,7 @@ export const bubbleSort = async (array: Ref<number[]>): Promise<Ref<number[]>> =
   while (!isSorted) {
     isSorted = true;
     for (let i = 0; i < array.value.length - 1 - counter; i++) {
-      await new Promise(r => setTimeout(r, 0.001));
+      await new Promise(r => setTimeout(r, 0.1));
       if (array.value[i] > array.value[i + 1]) {
         swap(i, i + 1, array);
         isSorted = false;
