@@ -1,15 +1,21 @@
-import { bubbleSort } from "./BubbleSort";
-import { mergeSort } from "./MergeSort";
+import { bubbleSort } from "./bubble-sort";
+import { mergeSort } from "./merge-sort";
+import { selectionSort } from "./selection-sort";
 
 export default [
   {
     id: 'bubble-sort',
-    formattedName: 'Bubble Sort',
+    label: 'Bubble Sort',
     run: bubbleSort,
   },
+  // {
+  //   id: 'merge-sort',
+  //   label: 'Merge Sort',
+  //   run: mergeSort,
+  // },
   {
-    id: 'merge-sort',
-    formattedName: 'Merge Sort',
-    run: mergeSort,
+    id: 'selection-sort',
+    label: 'Selection Sort',
+    run: selectionSort,
   },
 ];

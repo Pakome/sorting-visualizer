@@ -59,11 +59,11 @@ window.addEventListener('keyup', (ev) => {
 
 <template>
   <h1>Array Visualizer - size {{ arraySize }}</h1>
-  <button @click="generateNewArray(size)">Generate new</button>
-  <button @click="sortArray()">Sort & Visualize</button>
+  <button @click="sortArray()">Start</button>
+  <button @click="generateNewArray(size)">Regenerate</button>
   <input type="number" v-model="arraySize" @change="generateNewArray(arraySize)" />
   <select name="sorts" id="sort-select" v-model="selectedAlgo">
-    <option v-for="algo in algorithms" :value="algo">{{ algo.formattedName }}</option>
+    <option v-for="algo in algorithms" :value="algo">{{ algo.label }}</option>
   </select>
   <div class="array-container">
     <Element v-for="element in array" :value="element" />
