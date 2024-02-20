@@ -1,70 +1,89 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from "vue";
 
-import Element from './Element.vue';
-import algorithms from '../algorithms';
-import { shuffleArray } from './utils';
+import Element from "./Element.vue";
+import algorithms from "../algorithms";
+import { shuffleArray } from "./utils";
 
 const props = defineProps<{ size: number }>();
-const shuffledArray = shuffleArray([...Array(props.size).keys()]);
-let array = ref(shuffledArray);
-let arraySize = ref(props.size);
-let selectedAlgo = ref(algorithms[0]);
-let isComputing = false;
 
-const generateNewArray = (size: number): void => {
-  if (isComputing) {
-    return;
-  }
+const array = ref<number[]>([]);
+const arraySize = ref(0);
+const selectedAlgo = ref(algorithms[0]);
+const isRunning = ref(false);
+
+onMounted(() => {
+  generateNewArray(props.size);
+  arraySize.value = array.value.length;
+});
+
+function generateNewArray(size: number) {
   const newArray = [...Array(size).keys()];
   array.value = shuffleArray(newArray);
-}
+};
 
-const sortArray = async (): Promise<void> => {
-  isComputing = true;
+async function sortArray() {
+  isRunning.value = true;
   await selectedAlgo.value.run(array);
-  isComputing = false;
-}
+  isRunning.value = false;
+};
 
-window.addEventListener('keyup', (ev) => {
-  if (isComputing) {
+window.addEventListener("keyup", (ev) => {
+  if (isRunning.value) {
     return;
   }
-  if (ev.key === 'Enter') {
-    sortArray();
-  }
-  if (ev.key === 'g') {
-    generateNewArray(arraySize.value);
-  }
-  if (ev.key === 'ArrowUp') {
-    generateNewArray(arraySize.value++);
-  }
-  if (ev.key === 'ArrowDown') {
-    if (arraySize.value < 2) {
-      return;
-    }
-    generateNewArray(arraySize.value--);
-  }
-  if (ev.key === 'ArrowRight') {
-    generateNewArray(arraySize.value += 10);
-  }
-  if (ev.key === 'ArrowLeft') {
-    if (arraySize.value < 11) {
-      return;
-    }
-    generateNewArray(arraySize.value -= 10);
+
+  switch (ev.key) {
+    case "Enter":
+      sortArray();
+      break;
+    case "g":
+      generateNewArray(arraySize.value);
+      break;
+    case "ArrowUp":
+      generateNewArray(arraySize.value++);
+      break;
+    case "ArrowDown":
+      if (arraySize.value < 2) {
+        return;
+      }
+      generateNewArray(arraySize.value--);
+      break;
+    case "ArrowRight":
+      generateNewArray((arraySize.value += 10));
+      break;
+    case "ArrowLeft":
+      if (arraySize.value > 11) {
+        generateNewArray((arraySize.value -= 10));
+      }
+      break;
+    default:
+      break;
   }
 });
 </script>
 
 <template>
-  <h1>Array Visualizer - size {{ arraySize }}</h1>
-  <button @click="sortArray()">Start</button>
-  <button @click="generateNewArray(size)">Regenerate</button>
-  <input type="number" v-model="arraySize" @change="generateNewArray(arraySize)" />
-  <select name="sorts" id="sort-select" v-model="selectedAlgo">
+  <h1>Sorting Visualizer</h1>
+  <button @click="sortArray()" :disabled="isRunning">Start</button>
+  <button @click="generateNewArray(arraySize)" :disabled="isRunning">
+    Regenerate
+  </button>
+  <input
+    type="number"
+    v-model="arraySize"
+    @change="generateNewArray(arraySize)"
+    :disabled="isRunning"
+  />
+  <select
+    name="sorts"
+    id="sort-select"
+    v-model="selectedAlgo"
+    :disabled="isRunning"
+  >
     <option v-for="algo in algorithms" :value="algo">{{ algo.label }}</option>
   </select>
+  <div :style="{ height: 20 + (array.length * 10) - 400 + 'px' }">--</div>
   <div class="array-container">
     <Element v-for="element in array" :value="element" />
   </div>

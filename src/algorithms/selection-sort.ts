@@ -8,8 +8,10 @@ export async function selectionSort(array: Ref<number[]>) {
         currentMinIndex = y;
       }
     }
-    await new Promise(r => setTimeout(r, 1000 / i));
-    swap(array, i, currentMinIndex);
+    if (i !== currentMinIndex) {
+      swap(array, i, currentMinIndex);
+      await new Promise(r => setTimeout(r, 1000 / i));
+    }
   }
   return array;
 }

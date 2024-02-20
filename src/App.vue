@@ -3,7 +3,6 @@ import Board from './components/Board.vue'
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
   <Board />
 </template>
 
