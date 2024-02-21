@@ -10,7 +10,7 @@ export async function selectionSort(array: Ref<number[]>) {
     }
     if (i !== currentMinIndex) {
       swap(array, i, currentMinIndex);
-      await new Promise(r => setTimeout(r, 1000 / i));
+      await new Promise(r => setTimeout(r, 100));
     }
   }
   return array;

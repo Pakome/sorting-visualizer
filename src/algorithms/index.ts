@@ -1,5 +1,6 @@
 import { bubbleSort } from "./bubble-sort";
-import { mergeSort } from "./merge-sort";
+import { insertionSort } from "./insertion-sort";
+// import { mergeSort } from "./merge-sort";
 import { selectionSort } from "./selection-sort";
 
 export default [
@@ -13,6 +14,11 @@ export default [
   //   label: 'Merge Sort',
   //   run: mergeSort,
   // },
+  {
+    id: 'insertion-sort',
+    label: 'Insertion Sort',
+    run: insertionSort,
+  },
   {
     id: 'selection-sort',
     label: 'Selection Sort',

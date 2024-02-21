@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import Array from './Array.vue';
+
+const DEFAULT_ARRAY_SIZE = 70
 </script>
 
 <template>
-  <Array :size="50" />
+  <Array :size="DEFAULT_ARRAY_SIZE" />
 </template>
 
 <style scoped>
