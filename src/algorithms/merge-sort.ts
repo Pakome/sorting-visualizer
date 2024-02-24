@@ -1,21 +1,19 @@
-import { ref, Ref } from 'vue';
-
-export const mergeSort = async (array: Ref<number[]>): Promise<Ref<number[]>> => {
-	if (array.value.length === 1) {
+export const mergeSort = (array: number[]): number[] => {
+	if (array.length === 1) {
 		return array;
 	}
 
-	let firstArray = ref([]);
-	let secondArray = ref([]);
+	let firstArray: number[] = [];
+	let secondArray = [];
 
-	const middle = Math.ceil(array.value.length / 2);
-	const firstHalf = ref(array.value.slice(0, middle));
-	const secondHalf = ref(array.value.slice(middle, array.value.length));
+	const middle = Math.ceil(array.length / 2);
+	const firstHalf = array.slice(0, middle);
+	const secondHalf = array.slice(middle, array.length);
 
 	firstArray = mergeSort(firstHalf);
 	secondArray = mergeSort(secondHalf);
 
-	const sortedArray = ref(compareAndSort(firstArray, secondArray));
+	const sortedArray = compareAndSort(firstArray, secondArray);
 
 	return sortedArray;
 }
