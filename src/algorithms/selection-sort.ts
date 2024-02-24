@@ -1,4 +1,5 @@
 import { Ref } from 'vue';
+import { swap } from '../utils';
 
 export async function selectionSort(array: Ref<number[]>) {
   for (let i = 0; i < array.value.length; i++) {
@@ -14,10 +15,4 @@ export async function selectionSort(array: Ref<number[]>) {
     }
   }
   return array;
-}
-
-function swap(array: Ref<number[]>, a: number, b: number): void {
-  const temp = array.value[a];
-  array.value[a] = array.value[b];
-  array.value[b] = temp;
 }

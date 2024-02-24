@@ -24,7 +24,7 @@ async function quickSortHelper(array: Ref<number[]>, left: number, right: number
 
   const pivotIndex = left + swappedNumbers;
   swap(array, left, pivotIndex);
- 
+
   quickSortHelper(array, left, pivotIndex - 1);
   quickSortHelper(array, pivotIndex + 1, right);
 }

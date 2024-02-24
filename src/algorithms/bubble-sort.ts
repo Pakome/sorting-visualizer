@@ -1,6 +1,7 @@
 import { Ref } from 'vue';
+import { swap } from '../utils';
 
-export const bubbleSort = async (array: Ref<number[]>): Promise<Ref<number[]>> => {
+export async function bubbleSort(array: Ref<number[]>) {
   let isSorted = false;
   let counter = 0;
 
@@ -9,7 +10,7 @@ export const bubbleSort = async (array: Ref<number[]>): Promise<Ref<number[]>> =
     for (let i = 0; i < array.value.length - 1 - counter; i++) {
       await new Promise(r => setTimeout(r, 0.1));
       if (array.value[i] > array.value[i + 1]) {
-        swap(i, i + 1, array);
+        swap(array, i, i + 1);
         isSorted = false;
       }
     }
@@ -17,10 +18,4 @@ export const bubbleSort = async (array: Ref<number[]>): Promise<Ref<number[]>> =
   }
 
   return array;
-}
-
-const swap = (i: number, y: number, array: Ref<number[]>): void => {
-  const temp = array.value[i];
-  array.value[i] = array.value[y];
-  array.value[y] = temp;
 }
