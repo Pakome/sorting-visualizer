@@ -83,7 +83,7 @@ window.addEventListener("keyup", (ev) => {
   >
     <option v-for="algo in algorithms" :value="algo">{{ algo.label }}</option>
   </select>
-  <div :style="{ height: 20 + (array.length * 10) - 400 + 'px' }">--</div>
+  <div :style="{ height: 20 + (array.length * 10) - 400 + 'px' }"></div>
   <div class="array-container">
     <Element v-for="element in array" :value="element" />
   </div>
