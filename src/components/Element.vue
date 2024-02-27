@@ -5,7 +5,7 @@ defineProps<{ value: number }>()
 </script>
 
 <template>
-  <span class="element clay" :style="{ height: 20 + (value * 10) + 'px' }"></span>
+  <span class="element" :style="{ height: 20 + (value * 10) + 'px' }"></span>
 </template>
 
 <style scoped>

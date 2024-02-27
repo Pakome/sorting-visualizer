@@ -1,8 +1,8 @@
 import { Ref } from 'vue';
 
-export async function radixSort(array: Ref<number[]>) {
-  const largestRadix = findLargestRadix(array);
-  for (let i = 1; i <= largestRadix; i++) {
+export async function radixSort(array: Ref<number[]>, latency = 1000) {
+  const largestRadix = findLargestDigitCount(array);
+  for (let i = 0; i <= largestRadix; i++) {
     const buckets: {[bucket: number]: number[]} = {};
 
     for (const num of array.value) {
@@ -10,7 +10,7 @@ export async function radixSort(array: Ref<number[]>) {
       if (!buckets[digit]) {
         buckets[digit] = [];
       }
-      buckets[digit].push(num)
+      buckets[digit].push(num);
     }
 
     const newArray: number[] = [];
@@ -20,22 +20,27 @@ export async function radixSort(array: Ref<number[]>) {
     }
 
     array.value = newArray;
-    await new Promise(r => setTimeout(r, 1000));
+    await new Promise(r => setTimeout(r, latency));
   }
   return array;
 }
 
 function readDigit(num: number, radix: number) {
-  const number = String(num);
-  const digit = number[number.length - radix] || 0;
-  return Number(digit);
+  return Math.floor(Math.abs(num / Math.pow(10, radix))) % 10;
 }
 
-function findLargestRadix(array: Ref<number[]>) {
-  let largestRadix = String(array.value[0]).length;
+function findLargestDigitCount(array: Ref<number[]>) {
+  let largestDigits = getDigitCount(array.value[0]);
   for (const num of array.value) {
-    const currentNumRadix = String(num).length;
-    largestRadix = Math.max(largestRadix, currentNumRadix);
+    const currentNumDigits = getDigitCount(num);
+    largestDigits = Math.max(largestDigits, currentNumDigits);
   }
-  return largestRadix;
+  return largestDigits;
+}
+
+function getDigitCount(number: number) {
+  if (number === 0) {
+    return 1;
+  }
+  return Math.floor(Math.log10(Math.abs(number))) + 1;
 }

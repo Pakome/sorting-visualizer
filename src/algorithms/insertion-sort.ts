@@ -1,6 +1,6 @@
 import { Ref } from "vue";
 
-export async function insertionSort(array: Ref<number[]>) {
+export async function insertionSort(array: Ref<number[]>, latency = 100) {
   for (let i = 1; i < array.value.length; i++) {
     for (let y = i - 1; y >= -1; y--) {
       const numberToCompare = array.value[y] === undefined ? -Infinity : array.value[y];
@@ -11,7 +11,7 @@ export async function insertionSort(array: Ref<number[]>) {
         break;
       }
     }
-    await new Promise(r => setTimeout(r, 100));
+    await new Promise(r => setTimeout(r, latency));
   }
   return array;
 }
