@@ -15,7 +15,7 @@ const arrayLength: number = inject("arraySize") || 0;
       'selected-element': number.isSelected,
       'sorted-element': number.isSorted,
     }"
-    :style="{ height: 20 + number.value * 10 + 'px' }"
+    :style="{ height: ((number.value / arrayLength) * 100) + 5 + '%' }"
   >
     <span v-if="arrayLength <= 40">{{ number.value }}</span>
   </span>
