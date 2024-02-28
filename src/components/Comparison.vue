@@ -66,7 +66,7 @@ function resetAll() {
           <td>
             <div class="comparison-box">
               <div class="array-container">
-                <Element v-for="element in value.value" :value="element" />
+                <!-- <Element v-for="element in value.value" :value="element" /> -->
               </div>
             </div>
           </td>

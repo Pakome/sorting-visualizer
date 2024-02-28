@@ -24,7 +24,6 @@ const arrayLength: number = inject("arraySize") || 0;
 <style scoped>
 .element {
   width: 100%;
-  /* border: 1px solid #ffd3b6; */
   border-radius: 5px;
   background-color: #5aa9e6;
   display: flex;

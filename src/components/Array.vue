@@ -20,7 +20,6 @@ onMounted(() => {
 
 function generateNewArray(size: number) {
   const newArray = [...Array(size).keys()].map(num => ({
-    showNumber: false,
     isSorted: false,
     isSelected: false,
     value: num,
