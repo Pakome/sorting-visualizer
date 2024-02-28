@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, provide, ref } from "vue";
 
 import Element from "./Element.vue";
 import algorithms from "../algorithms";
@@ -33,6 +33,8 @@ async function sortArray() {
   await selectedAlgo.value.run(array as any);
   isRunning.value = false;
 };
+
+provide('arraySize', arraySize);
 
 window.addEventListener("keyup", (ev) => {
   if (isRunning.value) {

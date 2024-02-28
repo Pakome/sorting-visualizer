@@ -3,9 +3,10 @@ import { swap } from "../utils";
 import { ArrayElement } from "../models";
 import { setAllAsSorted } from "../utils";
 
-export async function bubbleSort(array: Ref<ArrayElement[]>, latency = 0.1) {
+export async function bubbleSort(array: Ref<ArrayElement[]>, latency = 250) {
   let isSorted = false;
   let counter = 0;
+  const lat = latency - array.value.length * 6;
 
   while (!isSorted) {
     isSorted = true;
@@ -14,7 +15,8 @@ export async function bubbleSort(array: Ref<ArrayElement[]>, latency = 0.1) {
       element.isSelected = true;
 
       if (array.value[i].value > array.value[i + 1].value) {
-        await swap(array, i, i + 1, latency);
+        await new Promise(r => setTimeout(r, lat));
+        await swap(array, i, i + 1);
         isSorted = false;
       }
 

@@ -1,12 +1,11 @@
 <script setup lang="ts">
+import { inject } from "vue";
+import { ArrayElement } from "../models";
 defineProps<{
-  number: {
-    showNumber: boolean;
-    isSorted: boolean;
-    isSelected: boolean;
-    value: number;
-  };
+  number: ArrayElement
 }>();
+
+const arrayLength: number = inject("arraySize") || 0;
 </script>
 
 <template>
@@ -18,7 +17,7 @@ defineProps<{
     }"
     :style="{ height: 20 + number.value * 10 + 'px' }"
   >
-    <!-- <span>{{ number.value }}</span> -->
+    <span v-if="arrayLength <= 40">{{ number.value }}</span>
   </span>
 </template>
 
@@ -27,13 +26,13 @@ defineProps<{
   width: 100%;
   /* border: 1px solid #ffd3b6; */
   border-radius: 5px;
-  background-color: #5AA9E6;
+  background-color: #5aa9e6;
   display: flex;
   align-items: flex-end;
   justify-content: center;
 }
 .selected-element {
-  background-color: #fac898;
+  background-color: #fac898 !important;
 }
 .sorted-element {
   background-color: #a8e6cf;
