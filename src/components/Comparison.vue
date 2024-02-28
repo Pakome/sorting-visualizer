@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import algorithms from "../algorithms";
-import { shuffleArray } from "./utils";
+import { shuffleArray } from "../utils";
 import Element from "./Element.vue";
 import { Ref, reactive, ref, toRaw } from "vue";
 

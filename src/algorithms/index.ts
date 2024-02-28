@@ -1,7 +1,6 @@
 import { bubbleSort } from "./bubble-sort";
 import { insertionSort } from "./insertion-sort";
 import { quickSort } from "./quick-sort";
-import { radixSort } from "./radix-sort";
 import { selectionSort } from "./selection-sort";
 
 export default [
@@ -24,10 +23,5 @@ export default [
     id: "quick-sort",
     label: "Quick Sort",
     run: quickSort,
-  },
-  {
-    id: "radix-sort",
-    label: "Radix Sort",
-    run: radixSort,
   },
 ];
