@@ -27,7 +27,7 @@ const settings = [
   {
     id: ShuffleType.AlmostSorted,
     name: "Almost sorted",
-    description: "Only the last 10% of the array will be shuffled",
+    description: "Only the last 20% of the array will be shuffled",
   },
   {
     id: ShuffleType.Inversed,

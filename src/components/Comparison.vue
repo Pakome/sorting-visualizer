@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import algorithms from "../algorithms";
-import { shuffleArray } from "../utils";
+import { useShuffle } from "../hooks";
+// import { shuffleArray } from "../utils";
 import Element from "./Element.vue";
 import { Ref, reactive, ref, toRaw } from "vue";
+
+const { shuffleArray } = useShuffle();
 
 const almostSortedArray = [1, 2, 3, 4, 5, 6, 7, 8, 10, 9];
 const shuffledArray = shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);

@@ -16,7 +16,7 @@ import Element from "./Element.vue";
 
 const props = defineProps<{ size: number }>();
 
-const { shuffle } = useShuffle();
+const { shuffleWithSelectedType } = useShuffle();
 const { triggerConfetti } = useConfetti();
 const array = ref<ArrayElement[]>([]);
 const arraySize = ref(0);
@@ -32,18 +32,18 @@ onMounted(() => {
 function generateNewArray(size: number | string) {
   size = Number(size);
   const newArray = [...Array(size).keys()].map((num) => ({
+    value: num + 1,
     isSorted: false,
     isSelected: false,
-    value: num + 1,
   }));
-  array.value = shuffle(newArray);
+  array.value = shuffleWithSelectedType(newArray) as any;
 }
 
 async function sortArray() {
   isRunning.value = true;
   await selectedAlgo.value.run(array as any);
   isRunning.value = false;
-  triggerConfetti();
+  // triggerConfetti();
 }
 
 function onClickConfig() {
