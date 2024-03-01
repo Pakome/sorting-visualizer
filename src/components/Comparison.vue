@@ -30,7 +30,7 @@ function runAll() {
   for (const algo of sortingAlgos) {
     for (const arrayTypeKey in algo.arrayTypes) {
       const arrayTypeValue = (algo.arrayTypes as any)[arrayTypeKey];
-      algo.run!(arrayTypeValue, 200);
+      algo.run!(arrayTypeValue);
     }
   }
 }

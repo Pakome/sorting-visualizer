@@ -6,9 +6,10 @@ import {
   ArrowPathRoundedSquareIcon,
 } from "@heroicons/vue/20/solid";
 import { onMounted, provide, ref } from "vue";
+import Modal from "./Modal.vue";
 
 import algorithms from "../algorithms";
-import { ArrayElement } from "../models";
+import { ArrayElement, SortingAlgorithm } from "../models";
 import { shuffleArray } from "../utils";
 import Element from "./Element.vue";
 
@@ -18,6 +19,7 @@ const array = ref<ArrayElement[]>([]);
 const arraySize = ref(0);
 const selectedAlgo = ref(algorithms[0]);
 const isRunning = ref(false);
+const showModal = ref(false);
 
 onMounted(() => {
   generateNewArray(props.size);
@@ -38,6 +40,14 @@ async function sortArray() {
   isRunning.value = true;
   await selectedAlgo.value.run(array as any);
   isRunning.value = false;
+}
+
+function onClickSeePerf() {
+  showModal.value = true;
+}
+
+function onModalClose() {
+  showModal.value = false;
 }
 
 provide("arraySize", arraySize);
@@ -128,6 +138,7 @@ window.addEventListener("keyup", (ev) => {
         <a
           href="#"
           class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500"
+          @click.prevent="onClickSeePerf"
         >
           See performance specs
         </a>
@@ -161,6 +172,8 @@ window.addEventListener("keyup", (ev) => {
       </RadioGroup>
     </div>
   </div>
+
+  <Modal v-if="showModal" :algorithm="(selectedAlgo as SortingAlgorithm)" @close="onModalClose"></Modal>
 </template>
 
 <style scoped>
