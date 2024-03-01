@@ -112,6 +112,7 @@ window.addEventListener("keyup", (ev) => {
       </button>
       <button
         @click="generateNewArray(arraySize)"
+        :disabled="isRunning"
         type="button"
         class="inline-flex items-center gap-x-2 ml-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
@@ -204,8 +205,8 @@ window.addEventListener("keyup", (ev) => {
 
 <style scoped>
 .array-visualizer {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 .array-container {
   margin-top: 4rem;
