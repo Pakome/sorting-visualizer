@@ -9,8 +9,8 @@ export interface ArrayElement {
 export interface SortingAlgorithm {
   id: string;
   label: string;
+  description: string;
   run: (array: Ref<ArrayElement[]>) => Promise<Ref<ArrayElement[]>>;
-  details: string;
   complexity: {
     average: ComplexityType;
     best: ComplexityType;

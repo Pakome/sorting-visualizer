@@ -72,9 +72,6 @@ onMounted(() => {
                     Performance specs
                   </DialogTitle>
                   <div class="mt-2 text-left">
-                    <p class="text-sm text-gray-500 mb-3">
-                      {{ algorithm.details }}
-                    </p>
                     <p class="text-sm text-gray-500">
                       <span class="font-bold">Best: </span>
                       <span class="italic">{{ algorithm.complexity.best }}</span>
@@ -86,6 +83,10 @@ onMounted(() => {
                     <p class="text-sm text-gray-500">
                       <span class="font-bold">Worst: </span>
                       <span class="italic">{{ algorithm.complexity.worst }}</span>
+                    </p>
+
+                    <p class="text-sm text-gray-500 mt-3">
+                      {{ algorithm.description }}
                     </p>
                   </div>
                 </div>

@@ -127,7 +127,6 @@ window.addEventListener("keyup", (ev) => {
           @input="generateNewArray(arraySize)"
         />
       </div>
-      <!-- <p>{{ arraySize }}</p> -->
     </div>
 
     <div class="array-container">
