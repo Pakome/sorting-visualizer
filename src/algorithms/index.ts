@@ -10,14 +10,14 @@ export default [
     run: bubbleSort,
   },
   {
-    id: "insertion-sort",
-    label: "Insertion Sort",
-    run: insertionSort,
-  },
-  {
     id: "selection-sort",
     label: "Selection Sort",
     run: selectionSort,
+  },
+  {
+    id: "insertion-sort",
+    label: "Insertion Sort",
+    run: insertionSort,
   },
   {
     id: "quick-sort",

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Array from './Array.vue';
-import Comparison from './Comparison.vue';
+import Array from "./Array.vue";
+import Comparison from "./Comparison.vue";
 
-const DEFAULT_ARRAY_SIZE = 70;
+const DEFAULT_ARRAY_SIZE = 40;
 </script>
 
 <template>

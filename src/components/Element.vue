@@ -12,8 +12,9 @@ const arrayLength: number = inject("arraySize") || 0;
   <span
     class="element"
     :class="{
-      'selected-element': number.isSelected,
-      'sorted-element': number.isSorted,
+      'bg-indigo-600 text-white': !number.isSelected && !number.isSorted,
+      'bg-orange-300': number.isSelected,
+      'bg-green-300': number.isSorted,
     }"
     :style="{ height: ((number.value / arrayLength) * 100) + 5 + '%' }"
   >
@@ -25,7 +26,6 @@ const arrayLength: number = inject("arraySize") || 0;
 .element {
   width: 100%;
   border-radius: 5px;
-  background-color: #5aa9e6;
   display: flex;
   align-items: flex-end;
   justify-content: center;
