@@ -1,20 +1,21 @@
 <script setup lang="ts">
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from "@headlessui/vue";
 import {
-  PlayCircleIcon,
-  SparklesIcon,
   ArrowPathRoundedSquareIcon,
+  PlayCircleIcon,
 } from "@heroicons/vue/20/solid";
 import { onMounted, provide, ref } from "vue";
 import Modal from "./Modal.vue";
 
 import algorithms from "../algorithms";
+import { useConfetti } from "../hooks";
 import { ArrayElement, SortingAlgorithm } from "../models";
 import { shuffleArray } from "../utils";
 import Element from "./Element.vue";
 
 const props = defineProps<{ size: number }>();
 
+const { triggerConfetti } = useConfetti();
 const array = ref<ArrayElement[]>([]);
 const arraySize = ref(0);
 const selectedAlgo = ref(algorithms[0]);
@@ -39,6 +40,7 @@ function generateNewArray(size: number | string) {
 async function sortArray() {
   isRunning.value = true;
   await selectedAlgo.value.run(array as any);
+  triggerConfetti();
   isRunning.value = false;
 }
 
@@ -173,7 +175,11 @@ window.addEventListener("keyup", (ev) => {
     </div>
   </div>
 
-  <Modal v-if="showModal" :algorithm="(selectedAlgo as SortingAlgorithm)" @close="onModalClose"></Modal>
+  <Modal
+    v-if="showModal"
+    :algorithm="selectedAlgo"
+    @close="onModalClose"
+  ></Modal>
 </template>
 
 <style scoped>

@@ -1,9 +1,27 @@
 <script setup lang="ts">
-import Board from './components/Board.vue'
+import { vConfetti } from "@neoconfetti/vue";
+
+import { useConfetti } from "./hooks";
+import Board from "./components/Board.vue";
+
+const { showConfetti } = useConfetti();
+const windowHeight = window.innerHeight;
+const windowWidth = window.innerWidth;
 </script>
 
 <template>
   <Board />
+
+  <div
+    v-if="showConfetti"
+    style="position: absolute; left: 50%; top: 30%"
+    v-confetti="{
+      force: 0.7,
+      stageWidth: windowHeight,
+      stageHeight: windowWidth,
+      colors: ['#ff3e00', '#40b3ff', '#676778'],
+    }"
+  />
 </template>
 
 <style>
