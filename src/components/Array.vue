@@ -1,20 +1,22 @@
 <script setup lang="ts">
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from "@headlessui/vue";
 import {
+  AdjustmentsHorizontalIcon,
   ArrowPathRoundedSquareIcon,
   PlayCircleIcon,
 } from "@heroicons/vue/20/solid";
 import { onMounted, provide, ref } from "vue";
 import Modal from "./Modal.vue";
+import SidePanel from "./SidePanel.vue";
 
 import algorithms from "../algorithms";
-import { useConfetti } from "../hooks";
+import { useConfetti, useShuffle, useSidePanel } from "../hooks";
 import { ArrayElement, SortingAlgorithm } from "../models";
-import { shuffleArray } from "../utils";
 import Element from "./Element.vue";
 
 const props = defineProps<{ size: number }>();
 
+const { shuffle } = useShuffle();
 const { triggerConfetti } = useConfetti();
 const array = ref<ArrayElement[]>([]);
 const arraySize = ref(0);
@@ -34,14 +36,19 @@ function generateNewArray(size: number | string) {
     isSelected: false,
     value: num + 1,
   }));
-  array.value = shuffleArray(newArray);
+  array.value = shuffle(newArray);
 }
 
 async function sortArray() {
   isRunning.value = true;
   await selectedAlgo.value.run(array as any);
-  triggerConfetti();
   isRunning.value = false;
+  triggerConfetti();
+}
+
+function onClickConfig() {
+  const { openSidePanel } = useSidePanel();
+  openSidePanel();
 }
 
 function onClickSeePerf() {
@@ -87,6 +94,7 @@ window.addEventListener("keyup", (ev) => {
       break;
   }
 });
+
 </script>
 
 <template>
@@ -107,8 +115,19 @@ window.addEventListener("keyup", (ev) => {
         type="button"
         class="inline-flex items-center gap-x-2 ml-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
-        New array
+        Regenerate
         <ArrowPathRoundedSquareIcon
+          class="-mr-0.5 h-5 w-5"
+          aria-hidden="true"
+        />
+      </button>
+      <button
+        @click="onClickConfig"
+        type="button"
+        class="inline-flex items-center gap-x-2 ml-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      >
+        Config
+        <AdjustmentsHorizontalIcon
           class="-mr-0.5 h-5 w-5"
           aria-hidden="true"
         />
@@ -173,6 +192,8 @@ window.addEventListener("keyup", (ev) => {
       </RadioGroup>
     </div>
   </div>
+
+  <SidePanel />
 
   <Modal
     v-if="showModal"

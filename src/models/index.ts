@@ -26,3 +26,9 @@ export enum ComplexityType {
   Exponential = "O(2n)",
   Factorial = "O(n!)",
 }
+
+export enum ShuffleType {
+  Random,
+  AlmostSorted,
+  Inversed,
+}
