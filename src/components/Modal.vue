@@ -69,25 +69,44 @@ onMounted(() => {
                     as="h3"
                     class="text-base font-semibold leading-6 text-gray-900"
                   >
-                    Performance specs
+                    <span class="text-indigo-600 font-semibold">{{
+                      algorithm.label
+                    }}</span>
+                    performance specs
                   </DialogTitle>
                   <div class="mt-2 text-left">
                     <p class="text-sm text-gray-500">
                       <span class="font-bold">Best: </span>
-                      <span class="italic">{{ algorithm.complexity.best }}</span>
+                      <span class="italic">{{
+                        algorithm.complexity.best
+                      }}</span>
                     </p>
                     <p class="text-sm text-gray-500">
                       <span class="font-bold">Average: </span>
-                      <span class="italic">{{ algorithm.complexity.average }}</span>
+                      <span class="italic">{{
+                        algorithm.complexity.average
+                      }}</span>
                     </p>
                     <p class="text-sm text-gray-500">
                       <span class="font-bold">Worst: </span>
-                      <span class="italic">{{ algorithm.complexity.worst }}</span>
+                      <span class="italic">{{
+                        algorithm.complexity.worst
+                      }}</span>
                     </p>
 
                     <p class="text-sm text-gray-500 mt-3">
                       {{ algorithm.description }}
                     </p>
+
+                    <!-- <div class="mt-4 flex">
+                      <a
+                        href="#"
+                        class="text-sm font-semibold leading-6 text-indigo-400"
+                      >
+                        See article on Wikipedia
+                        <span aria-hidden="true">&rarr;</span></a
+                      >
+                    </div> -->
                   </div>
                 </div>
               </div>

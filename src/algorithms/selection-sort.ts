@@ -25,7 +25,7 @@ export async function selectionSort(array: Ref<ArrayElement[]>, latency = 200) {
 
     selectedElement.isSelected = false;
     if (i !== currentMinIndex) {
-      await swap(array, i, currentMinIndex);
+      swap(array, i, currentMinIndex);
     }
     array.value[i].isSorted = true;
   }

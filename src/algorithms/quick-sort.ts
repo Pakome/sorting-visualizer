@@ -28,13 +28,13 @@ async function quickSortHelper(array: Ref<ArrayElement[]>, left: number, right: 
     await new Promise(r => setTimeout(r, lat));
     if (array.value[i].value < pivot) {
       swappedNumbers++;
-      await swap(array, i, left + swappedNumbers);
+      swap(array, i, left + swappedNumbers);
     }
     comparedElement.isSelected = false;
   }
 
   const pivotIndex = left + swappedNumbers;
-  await swap(array, left, pivotIndex);
+  swap(array, left, pivotIndex);
 
   selectedElement.isSelected = false;
   selectedElement.isSorted = true;

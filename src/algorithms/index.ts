@@ -1,5 +1,6 @@
 import { ComplexityType, SortingAlgorithm } from "../models";
 import { bubbleSort } from "./bubble-sort";
+import { cocktailSort } from "./cocktail-shaker-sort";
 import { insertionSort } from "./insertion-sort";
 import { quickSort } from "./quick-sort";
 import { selectionSort } from "./selection-sort";
@@ -24,6 +25,17 @@ const sortingAlgorithms: SortingAlgorithm[] = [
     complexity: {
       average: ComplexityType.Quadratic,
       best: ComplexityType.Quadratic,
+      worst: ComplexityType.Quadratic,
+    },
+  },
+  {
+    id: "cocktail-shaker-sort",
+    label: "Cocktail Shaker Sort",
+    run: cocktailSort,
+    description: "",
+    complexity: {
+      average: ComplexityType.Quadratic,
+      best: ComplexityType.Linear,
       worst: ComplexityType.Quadratic,
     },
   },
