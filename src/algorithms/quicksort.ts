@@ -4,13 +4,13 @@ import { ArrayElement } from "../models";
 
 let lat = 250;
 
-export async function quickSort(array: Ref<ArrayElement[]>, latency = 300) {
+export async function quicksort(array: Ref<ArrayElement[]>, latency = 300) {
   lat = latency - array.value.length * 7;
-  await quickSortHelper(array, 0, array.value.length - 1, latency);
+  await quicksortHelper(array, 0, array.value.length - 1, latency);
   return array;
 }
 
-async function quickSortHelper(array: Ref<ArrayElement[]>, left: number, right: number, latency: number) {
+async function quicksortHelper(array: Ref<ArrayElement[]>, left: number, right: number, latency: number) {
   const pivot = array.value[left]?.value;
   const selectedElement = array.value[left] || {};
   selectedElement.isSelected = true;
@@ -39,6 +39,6 @@ async function quickSortHelper(array: Ref<ArrayElement[]>, left: number, right: 
   selectedElement.isSelected = false;
   selectedElement.isSorted = true;
 
-  await quickSortHelper(array, left, pivotIndex - 1, lat);
-  await quickSortHelper(array, pivotIndex + 1, right, lat);
+  await quicksortHelper(array, left, pivotIndex - 1, lat);
+  await quicksortHelper(array, pivotIndex + 1, right, lat);
 }

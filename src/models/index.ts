@@ -10,6 +10,7 @@ export interface SortingAlgorithm {
   id: string;
   label: string;
   description: string;
+  wikipediaLink: string;
   run: (array: Ref<ArrayElement[]>) => Promise<Ref<ArrayElement[]>>;
   complexity: {
     average: ComplexityType;
