@@ -29,7 +29,7 @@ export enum ComplexityType {
 }
 
 export enum ShuffleType {
-  Random,
-  AlmostSorted,
-  Inversed,
+  Random = "random",
+  AlmostSorted = "almost-sorted",
+  Inversed = "inversed",
 }

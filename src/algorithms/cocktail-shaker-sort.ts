@@ -4,6 +4,8 @@ import { ArrayElement } from "../models";
 import { setAllAsSorted } from "../utils";
 
 export async function cocktailSort(array: Ref<ArrayElement[]>) {
+  // const latency = 150 - array.value.length * 4;
+  const latency = 10;
   let isSorted = false;
   let right = array.value.length - 1;
   let left = 0;
@@ -16,7 +18,7 @@ export async function cocktailSort(array: Ref<ArrayElement[]>) {
       selectedElement.isSelected = true;
 
       if (array.value[i].value > array.value[i + 1].value) {
-        await wait(0);
+        await wait(latency);
         swap(array, i, i + 1);
         isSorted = false;
       }
@@ -31,7 +33,7 @@ export async function cocktailSort(array: Ref<ArrayElement[]>) {
       selectedElement.isSelected = true;
 
       if (array.value[i].value < array.value[i - 1].value) {
-        await wait(0);
+        await wait(latency);
         swap(array, i, i - 1);
         isSorted = false;
       }

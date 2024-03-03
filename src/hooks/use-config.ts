@@ -1,7 +1,21 @@
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { ArrayElement, ShuffleType } from "../models";
 
 const selectedShuffleType = ref(ShuffleType.Random);
+
+watch(selectedShuffleType, (newValue) => {
+  const searchParams = new URL(window.location.href).searchParams;
+  searchParams.set('shuffleType', newValue);
+  const newUrl =
+    window.location.protocol +
+    "//" +
+    window.location.host +
+    window.location.pathname +
+    `?${searchParams.toString()}`;
+  window.history.pushState({ path: newUrl }, "", newUrl);
+
+  console.log("shuffleType :>> ", newValue);
+});
 
 export function useShuffle() {
   function setShuffleType(shuffleType: ShuffleType) {

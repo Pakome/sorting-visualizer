@@ -7,7 +7,7 @@ import {
   TransitionRoot,
 } from "@headlessui/vue";
 import { XMarkIcon } from "@heroicons/vue/24/outline";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 import {
   RadioGroup,
@@ -38,7 +38,10 @@ const settings = [
 
 const { isOpen, closeSidePanel } = useSidePanel();
 const { selectedShuffleType } = useShuffle();
-const selected = ref(settings[0]);
+
+watch(selectedShuffleType, () => {
+  closeSidePanel();
+});
 </script>
 
 <template>

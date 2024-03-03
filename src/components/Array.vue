@@ -5,18 +5,18 @@ import {
   ArrowPathRoundedSquareIcon,
   PlayCircleIcon,
 } from "@heroicons/vue/20/solid";
-import { onMounted, provide, ref } from "vue";
+import { onMounted, provide, ref, watch } from "vue";
 import Modal from "./Modal.vue";
 import SidePanel from "./SidePanel.vue";
 
 import algorithms from "../algorithms";
 import { useConfetti, useShuffle, useSidePanel } from "../hooks";
-import { ArrayElement, SortingAlgorithm } from "../models";
+import { ArrayElement, ShuffleType, SortingAlgorithm } from "../models";
 import Element from "./Element.vue";
 
 const props = defineProps<{ size: number }>();
 
-const { shuffleWithSelectedType } = useShuffle();
+const { shuffleWithSelectedType, setShuffleType } = useShuffle();
 const { triggerConfetti } = useConfetti();
 const array = ref<ArrayElement[]>([]);
 const arraySize = ref(0);
@@ -25,9 +25,20 @@ const isRunning = ref(false);
 const showModal = ref(false);
 
 onMounted(() => {
+  setDefaultValuesFromQueryParams();
   generateNewArray(props.size);
   arraySize.value = array.value.length;
 });
+
+function setDefaultValuesFromQueryParams() {
+  const url = new URL(window.location.href);
+
+  const sortId = url.searchParams.get("sortId") ?? algorithms[0].id;
+  selectedAlgo.value = algorithms.find((algo) => algo.id === sortId)!;
+
+  const shuffleType = url.searchParams.get("shuffleType") ?? ShuffleType.Random;
+  setShuffleType(shuffleType as ShuffleType);
+}
 
 function generateNewArray(size: number | string) {
   size = Number(size);
@@ -45,6 +56,19 @@ async function sortArray() {
   isRunning.value = false;
   // triggerConfetti();
 }
+
+watch(selectedAlgo, (newValue) => {
+  const searchParams = new URL(window.location.href).searchParams;
+  searchParams.set('sortId', newValue.id);
+  const newUrl =
+    window.location.protocol +
+    "//" +
+    window.location.host +
+    window.location.pathname +
+    `?${searchParams.toString()}`;
+
+  window.history.pushState({ path: newUrl }, "", newUrl);
+});
 
 function onClickConfig() {
   const { openSidePanel } = useSidePanel();
@@ -94,7 +118,6 @@ window.addEventListener("keyup", (ev) => {
       break;
   }
 });
-
 </script>
 
 <template>
@@ -128,10 +151,7 @@ window.addEventListener("keyup", (ev) => {
         class="inline-flex items-center gap-x-2 ml-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
         Config
-        <AdjustmentsHorizontalIcon
-          class="-mr-0.5 h-5 w-5"
-          aria-hidden="true"
-        />
+        <AdjustmentsHorizontalIcon class="-mr-0.5 h-5 w-5" aria-hidden="true" />
       </button>
 
       <div class="ml-12 w-64">
