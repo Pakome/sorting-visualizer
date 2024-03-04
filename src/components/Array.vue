@@ -123,12 +123,12 @@ window.addEventListener("keyup", (ev) => {
 <template>
   <div class="array-visualizer">
     <!-- <h1 class="text-3xl mb-2">Sorting Visualizer</h1> -->
-    <div class="flex justify-center items-center">
+    <div class="flex justify-center items-center flex-col md:flex-row">
       <button
         @click="sortArray()"
         :disabled="isRunning"
         type="button"
-        class="inline-flex items-center gap-x-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        class="inline-flex items-center gap-x-2 mt-1 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
         Start
         <PlayCircleIcon class="-mr-0.5 h-5 w-5" aria-hidden="true" />
@@ -137,7 +137,7 @@ window.addEventListener("keyup", (ev) => {
         @click="generateNewArray(arraySize)"
         :disabled="isRunning"
         type="button"
-        class="inline-flex items-center gap-x-2 ml-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        class="inline-flex items-center gap-x-2 ml-2 mt-1 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
         Regenerate
         <ArrowPathRoundedSquareIcon
@@ -148,7 +148,7 @@ window.addEventListener("keyup", (ev) => {
       <button
         @click="onClickConfig"
         type="button"
-        class="inline-flex items-center gap-x-2 ml-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        class="inline-flex items-center gap-x-2 ml-2 mt-1 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
         Config
         <AdjustmentsHorizontalIcon class="-mr-0.5 h-5 w-5" aria-hidden="true" />
@@ -189,7 +189,7 @@ window.addEventListener("keyup", (ev) => {
         <RadioGroupLabel class="sr-only">
           Choose an algorithm option
         </RadioGroupLabel>
-        <div class="flex gap-4">
+        <div class="flex gap-4 flex-col md:flex-row">
           <RadioGroupOption
             as="template"
             v-for="algo in algorithms"

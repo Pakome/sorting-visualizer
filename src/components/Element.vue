@@ -1,9 +1,17 @@
 <script setup lang="ts">
-import { inject } from "vue";
+import { inject, onMounted, ref } from "vue";
 import { ArrayElement } from "../models";
 defineProps<{
-  number: ArrayElement
+  number: ArrayElement;
 }>();
+
+const windowWidth = ref(window.innerWidth);
+
+onMounted(() => {
+  window.addEventListener("resize", () => {
+    windowWidth.value = window.innerWidth;
+  });
+});
 
 const arrayLength: number = inject("arraySize") || 0;
 </script>
@@ -16,9 +24,15 @@ const arrayLength: number = inject("arraySize") || 0;
       'bg-orange-300': number.isSelected,
       'bg-green-300': number.isSorted,
     }"
-    :style="{ height: ((number.value / arrayLength) * 100) + 5 + '%' }"
+    :style="{ height: (number.value / arrayLength) * 100 + 5 + '%' }"
   >
-    <span v-if="arrayLength <= 40">{{ number.value }}</span>
+    <span
+      v-if="
+        (arrayLength <= 40 && windowWidth >= 860) ||
+        (arrayLength <= 20 && windowWidth <= 800)
+      "
+      >{{ number.value }}</span
+    >
   </span>
 </template>
 

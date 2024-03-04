@@ -13,8 +13,6 @@ watch(selectedShuffleType, (newValue) => {
     window.location.pathname +
     `?${searchParams.toString()}`;
   window.history.pushState({ path: newUrl }, "", newUrl);
-
-  console.log("shuffleType :>> ", newValue);
 });
 
 export function useShuffle() {
