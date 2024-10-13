@@ -1,11 +1,37 @@
-# Vue 3 + Typescript + Vite
+[![Netlify Status](https://api.netlify.com/api/v1/badges/50bcecff-9cf2-4c5f-a5b4-7b0c492d7cb2/deploy-status)](https://app.netlify.com/sites/algo-pathfinding-visualizer/deploys)
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+https://sorting-visualizer.maximelardier.dev/
 
-## Recommended IDE Setup
+<h1 align="center">Sorting Visualizer</h1> 
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+<br>
 
-## Type Support For `.vue` Imports in TS
+<p align="center">
+    <a href="#">
+        <img alt="Sorting Visualizer" title="Sorting Visualizer" src="https://i.imgur.com/YPVA1E8.png" width="250">
+    </a>
+</p>
+<p align="center">Visualize how common sorting algorithm works.</p>
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+## Demo
+
+This app let you visualize how most famous sorting algorithms works and generate specific type of arrays (shuffled, inversed, etc..)
+
+Principal features :
+- Visualize sorting process
+- Change the shuffling algorithm
+- Change the size of the array
+- See the complexity of each implementation
+
+The goal of the app is to provide an easy way to visualize the sorting process of each implementation.
+
+## TODO
+
+### Next steps
+
+- [] Counting sort
+- [] Merge sort
+
+## Contact
+
+Author : [Maxime Lardier](mailto:max@💻.kz)
