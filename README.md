@@ -15,6 +15,8 @@ https://sorting-visualizer.maximelardier.dev/
 
 ## Demo
 
+https://github.com/user-attachments/assets/cadd3eb3-cf9e-4e19-8266-46d42ed4a0bc
+
 This app let you visualize how most famous sorting algorithms works and generate specific type of arrays (shuffled, inversed, etc..)
 
 Principal features :
