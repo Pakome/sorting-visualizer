@@ -29,8 +29,8 @@ The goal of the app is to provide an easy way to visualize the sorting process o
 
 ### Next steps
 
-- [] Counting sort
-- [] Merge sort
+- [ ] Counting sort
+- [ ] Merge sort
 
 ## Contact
 
